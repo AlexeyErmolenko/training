@@ -1,0 +1,39 @@
+type: object
+description: Notification message
+required:
+  - data
+  - created_at
+properties:
+
+  id:
+    type: string
+    description: Unique notification ID
+    readOnly: true
+    example: a40c2d6c-8e42-4966-a38d-dc8c249a991e
+    x-chance-type: uuid
+
+  data:
+    type: object
+    description: Notification message text
+    maxLength: 500
+    example:
+      message: 'This is a message content'
+      gameId: 34
+    x-chance-type: paragraph
+
+  read_at:
+    description: If this notification was marked as viewed
+    type: string
+    format: date-time
+    example: null
+    x-nullable: true
+    x-chance-type: fixed
+    x-type-value: null
+
+  created_at:
+    description: When message was created, see RFC3339/ISO8601 for format
+    type: string
+    format: date-time
+    example: 2017-04-12T23:20:50.52Z
+    x-chance-type: fixed
+    x-type-value: 2017-04-12T23:20:50.52Z

@@ -1,0 +1,334 @@
+{
+	"variables": [],
+	"info": {
+		"name": "training_start",
+		"_postman_id": "e62f3385-a6bd-3131-4572-488f6d9feeaa",
+		"description": "training_start collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Authentication & User",
+			"description": "",
+			"item": [
+				{
+					"name": "Logout",
+					"request": {
+				"url": "{{host}}/api/auth",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"if (jsonData.token) {",
+									"    postman.setEnvironmentVariable(\"token\", jsonData.token);",
+									"    tests['login'] = true",
+									"}",
+									"else {",
+									"    tests['login'] = false",
+									"}"
+								]
+							}
+						}
+					],
+					"request": {
+				"url": "{{host}}/api/auth",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n   \"email\": \"user@mail.com\",\n   \"password\": \"123456\"\n}"
+						},
+						"description": "Login"
+					},
+					"response": []
+				},
+				{
+					"name": "User create",
+					"request": {
+				"url": "{{host}}/api/users",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"first_name\": \"Another\",\n  \"last_name\": \"User\",\n  \"email\": \"user1@mail.com\",\n  \"gender\": \"Male\",\n  \"password\": \"123456\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "User update",
+					"request": {
+				"url": "{{host}}/api/users/me",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n   \"first_name\": \"User\",\n   \"last_name\": \"LastName\",\n   \"email\": \"user@email.com\",\n   \"gender\": \"Female\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "User profile",
+					"request": {
+				"url": "{{host}}/api/users/me",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "maxim_erm4@mail.ru",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "password",
+									"value": "121212",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "name",
+									"value": "maxim",
+									"type": "text",
+									"enabled": true
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "User create CORS",
+					"request": {
+				"url": "{{host}}/api/users",
+						"method": "OPTIONS",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "accept",
+								"value": "*/*",
+								"description": ""
+							},
+							{
+								"key": "accept-language",
+								"value": "en-US,en;q=0.8,ru;q=0.6",
+								"description": ""
+							},
+							{
+								"key": "access-control-request-headers",
+								"value": "content-type",
+								"description": ""
+							},
+							{
+								"key": "access-control-request-method",
+								"value": "POST",
+								"description": ""
+							},
+							{
+								"key": "origin",
+								"value": "https://apidocs.saritasa-hosting.com",
+								"description": ""
+							},
+							{
+								"key": "referer",
+								"value": "https://apidocs.saritasa-hosting.com/?url=training_start/develop/training_start-latest.yaml",
+								"description": ""
+							},
+							{
+								"key": "user-agent",
+								"value": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.76 Safari/537.36",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"first_name\": \"Another\",\n  \"last_name\": \"User\",\n  \"email\": \"user1@mail.com\",\n  \"gender\": \"Male\",\n  \"password\": \"123456\",\n  \"trash\": \"some\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "User delete",
+					"request": {
+				"url": "{{host}}/api/users/{{userID}}",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Password Reset Request",
+					"request": {
+				"url": "{{host}}/api/auth/password/reset",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"user1@mail.com\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Password Reset Confirm",
+					"request": {
+				"url": "{{host}}/api/auth/password/reset",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"newPassword\": \"123456\",\n  \"newPasswordConfirm\": \"123456\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Settings",
+			"description": "",
+			"item": [
+				{
+					"name": "Notifications Settings",
+					"request": {
+				"url": "{{host}}/api/settings/notifications",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "maxim_erm4@mail.ru",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "password",
+									"value": "121212",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "name",
+									"value": "maxim",
+									"type": "text",
+									"enabled": true
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Notifications Settings Update",
+					"request": {
+				"url": "{{host}}/api/settings/notifications",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n\t{\"id\": 1, \"is_on\": true },\n\t{\"id\": 2, \"is_on\": false }\n]"
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

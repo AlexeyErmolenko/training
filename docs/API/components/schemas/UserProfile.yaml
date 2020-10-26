@@ -1,0 +1,38 @@
+type: object
+description: Model for editing user's profile info
+allOf:
+- $ref: 'User.yaml'
+- type: object
+  required:
+  - instagram_id
+  - facebook_id
+  properties:
+
+    instagram_id:
+      type: string
+      description: Instagram user account
+      readOnly: true
+      x-nullable: true
+      example: 143lkj3lk4j12342342n1l23k4j
+      x-chance-type: hash
+
+    facebook_id:
+      type: string
+      description: Facebook user account
+      readOnly: true
+      x-nullable: true
+      example: 98124kl134lk12j3l4k2342k3jh42
+      x-chance-type: hash
+
+    avatar_url:
+      description: User's avatar
+      $ref: 'utils/ImageURL.yaml'
+      readOnly: true
+
+    shipping_address:
+      $ref: './Address.yaml'
+
+    created_at:
+      description: When user account was created, see RFC3339/ISO8601 for format
+      $ref: 'utils/DateTimeISO.yaml'
+      readOnly: true

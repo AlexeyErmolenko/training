@@ -1,0 +1,10 @@
+.git
+/.data
+/*.php
+/ci
+!/ci/docker
+/docs
+!/docs/API
+node_modules
+/vendor
+/.env.*

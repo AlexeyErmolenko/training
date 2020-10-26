@@ -1,0 +1,37 @@
+type: object
+required:
+- message
+properties:
+
+  message:
+    type: string
+    description: Error message, that should be shown to user
+    x-chance-type: sentence
+
+  status_code:
+    type: integer
+    description: Duplicates HTTP status code
+    x-type-options:
+      min: 400
+      max: 422
+
+  debug:
+    type: object
+    description: Information for debugging
+    properties:
+      line:
+        type: integer
+        description: Line of code
+        x-type-options:
+          max: 1000
+      file:
+        type: string
+        description: File where error happened
+      class:
+        type: string
+        description: PHP class name
+      trace:
+        type: array
+        description: Trace
+        items:
+          type: string

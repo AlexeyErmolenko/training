@@ -1,0 +1,35 @@
+type: object
+description: Address
+required:
+- address
+- city
+- state
+- zip
+properties:
+
+  address:
+    type: string
+    description: Street, building, appartments
+    maxLength: 100
+    example: 1234, Main St
+    x-chance-type: address
+
+  city:
+    type: string
+    description: City
+    maxLength: 40
+    example: Irvine
+    x-chance-type: city
+
+  state:
+    type: string
+    description: US State
+    maxLength: 40
+    example: California
+    x-chance-type: state
+
+  zip:
+    type: integer
+    description: Postal ZIP code
+    x-chance-type: zip
+    example: 92602

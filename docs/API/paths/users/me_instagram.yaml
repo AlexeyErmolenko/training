@@ -1,0 +1,39 @@
+post:
+  tags: ['User']
+  summary: Link Instagram account
+  operationId: LinkInstagram
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: '../../components/schemas.yaml#/SocialLogin'
+  responses:
+    201:
+      description: Account linked successfully
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yaml#/User'
+    400:
+      $ref: '../../components/responses.yaml#/InputValidationError'
+    401:
+      $ref: '../../components/responses.yaml#/UserNotAuthorized'
+    default:
+      $ref: '../../components/responses.yaml#/APIErrorResponse'
+  security:
+    - AuthToken: []
+
+delete:
+  tags: ['User']
+  summary: Unlink Instagram account
+  operationId: UnlinkInstagram
+  responses:
+    204:
+      description: Account unlinked successfully
+    401:
+      $ref: '../../components/responses.yaml#/UserNotAuthorized'
+    default:
+      $ref: '../../components/responses.yaml#/APIErrorResponse'
+  security:
+    - AuthToken: []

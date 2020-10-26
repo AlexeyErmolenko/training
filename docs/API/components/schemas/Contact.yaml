@@ -1,0 +1,39 @@
+type: object
+description: Location of audience (ex. city)
+properties:
+  id:
+    type: number
+    description: ID
+    readOnly: true
+    minimum: 1
+    example: 45
+
+  name:
+    type: string
+    description: Contact name
+    maxLength: 255
+    example: Barth Simpson
+
+  email:
+    type: string
+    description: Email
+    maxLength: 100
+    example: barth.simpson@springfield.org
+
+  phone:
+    type: string
+    description: Phone
+    maxLength: 100
+    example: '+1621646846'
+
+  phone2:
+    type: string
+    description: Secondary Phone (optional)
+    maxLength: 100
+    example: '+1192874246'
+
+  comment:
+    type: string
+    description: Any additional info about person
+    maxLength: 500
+    example: May seem angy, but he always speaks that way

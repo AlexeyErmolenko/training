@@ -1,0 +1,14 @@
+type: object
+description: Model for editing user's profile info
+allOf:
+  - $ref: 'User.yaml'
+  - type: object
+    description: Model for editing user registration
+    required:
+      - password
+    properties:
+
+      password:
+        description: User password
+        type: string
+        example: '123456'

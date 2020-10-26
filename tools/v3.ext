@@ -1,0 +1,12 @@
+authorityKeyIdentifier=keyid,issuer
+basicConstraints=CA:FALSE
+keyUsage = digitalSignature, nonRepudiation, keyEncipherment, dataEncipherment
+subjectAltName = @alt_names
+
+[alt_names]
+DNS.1 = training_start
+DNS.2 = training_start-web.service.docker
+DNS.3 = training_start-api.service.docker
+DNS.4 = training_start.lo
+DNS.5 = training_start.dev
+DNS.6 = training_start.local

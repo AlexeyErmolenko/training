@@ -1,0 +1,78 @@
+version: '3.4'
+services:
+
+  base:
+    build:
+      context: ../..
+      dockerfile: ci/docker/Dockerfile.base
+    image: training_start:base
+
+  web:
+    build:
+      context: ../..
+      dockerfile: ci/docker/Dockerfile.local
+      args:
+        hostUID: 1000
+        hostGID: 1000
+    image: training_start-web
+    hostname: training_start-web
+    container_name: training_start-web
+    depends_on:
+      - db
+      - redis
+      - mailcatcher
+    environment:
+      APP_ENV: local
+      PHP_IDE_CONFIG: serverName=training_start.docker.cli
+      COMPOSER_HOME: /home/www/.composer
+    labels:
+      SERVICE_NAME: training_start-web
+      SERVICE_80_NAME: training_start-web
+      SERVICE_443_NAME: training_start-web
+    volumes:
+    - ../../:/app
+    - ~/.composer:/home/www/.composer
+
+  db:
+    image: postgres:12-alpine
+    hostname: training_start-db
+    container_name: training_start-db
+    ports: [5432]
+    environment:
+      POSTGRES_DB: training_start
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: secret
+      PGDATA: /var/lib/postgresql/data/pgdata
+    labels:
+      SERVICE_NAME: training_start-db
+#    volumes:
+#      - ../../.data:/var/lib/postgresql/data/pgdata
+
+  redis:
+    image: redis:alpine
+    container_name: training_start-redis
+    labels:
+      SERVICE_NAME: training_start-redis
+
+  mailcatcher:
+    image: djfarrelly/maildev
+    container_name: training_start-mail
+    hostname: training_start-mail
+    ports: [25, 80]
+    labels:
+      SERVICE_NAME: training_start-mail
+      SERVICE_25_NAME: training_start-mail
+      SERVICE_80_NAME: training_start-mail
+
+  pgadmin:
+    image: chorss/docker-pgadmin4
+    container_name: pgadmin
+    hostname: pgadmin
+    environment:
+      SERVER_MODE: 'false'
+      SERVER_PORT: 5050
+      UID: 1000
+      GID: 1000
+    labels:
+      SERVICE_NAME: pgadmin
+      SERVICE_5050_NAME: pgadmin

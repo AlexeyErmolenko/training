@@ -1,0 +1,14 @@
+[req]
+default_bits = 2048
+prompt = no
+default_md = sha256
+distinguished_name = dn
+
+[dn]
+C=RU
+ST=Yekaterinburg
+L=Sverdlovskaya oblast
+O=Saritasa
+OU=Development
+emailAddress=sergey@saritasa.com
+CN=training_start-web.service.docker

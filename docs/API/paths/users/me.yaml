@@ -1,0 +1,39 @@
+get:
+  tags: ['User']
+  summary: Get current user's profile info
+  operationId: GetUserProfile
+  responses:
+    200:
+      description: 'Read user profile: success'
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yaml#/UserProfile'
+    401:
+      $ref: '../../components/responses.yaml#/UserNotAuthorized'
+  security:
+    - AuthToken: []
+
+put:
+  tags: ['User']
+  summary: Edit current user's profile
+  operationId: UpdateUserProfile
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: '../../components/schemas.yaml#/UserProfile'
+  responses:
+    200:
+      description: 'Return updated user profile: success'
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yaml#/UserProfile'
+    400:
+      $ref: '../../components/responses.yaml#/InputValidationError'
+    401:
+      $ref: '../../components/responses.yaml#/UserNotAuthorized'
+  security:
+    - AuthToken: []

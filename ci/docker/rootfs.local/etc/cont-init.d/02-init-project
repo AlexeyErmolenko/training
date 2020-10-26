@@ -1,0 +1,18 @@
+#!/usr/bin/with-contenv bash
+
+source /root/.bashrc
+
+# Execute with application permissions - as nginx user
+xargs -0 exec s6-setuidgid nginx sh -c <<EOF
+  echo -e "${BLUE}--- Install composer dependencies ---${NC}"
+  php composer.phar install --prefer-dist --no-interaction --no-progress --no-suggest
+  echo -e "${BLUE}--- Initialize Laravel ---${NC}"
+  php artisan cache:clear
+  php artisan storage:link
+  php artisan telescope:publish
+  source tools/wait-for-db.sh
+  echo -e "${BLUE}--- Run Database migrations ---${NC}"
+  php -d xdebug.remote_enable=0 artisan migrate --force
+  php artisan up
+EOF
+echo -e "${BLUE}--- Project initialization completed ---${NC}"

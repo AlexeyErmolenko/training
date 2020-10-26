@@ -1,0 +1,6 @@
+description: Delivery method
+type: string
+enum:
+- UPS Ground
+- UPS 2 Day
+example: UPS Ground

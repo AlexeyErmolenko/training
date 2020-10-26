@@ -1,0 +1,22 @@
+{
+  "id": "d6e08249-8483-f455-9069-3cd14475d81b",
+  "name": "training_start Dev",
+  "values": [
+    {
+      "key": "host",
+      "value": "https://training_start.saritasa-hosting.com",
+      "type": "text",
+      "enabled": true
+    },
+    {
+      "key": "token",
+      "type": "text",
+      "value": "",
+      "enabled": true
+    }
+  ],
+  "timestamp": 1486121981421,
+  "_postman_variable_scope": "environment",
+  "_postman_exported_at": "2017-02-03T13:21:24.755Z",
+  "_postman_exported_using": "Postman/4.9.2"
+}

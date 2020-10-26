@@ -1,0 +1,28 @@
+get:
+  tags: ['Notifications']
+  summary: 'Get paginated list of notifications'
+  operationId: GetNotificationsList
+  parameters:
+    - $ref: '../../components/parameters.yaml#/PageSize'
+    - $ref: '../../components/parameters.yaml#/Page'
+    - description: NotificationType
+      name: type
+      in: query
+      allowEmptyValue: true
+      schema:
+        type: string
+        example: NewOffer
+
+  responses:
+    200:
+      description: Return list of notifications successfully
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yaml#/NotificationsList'
+    401:
+      $ref: '../../components/responses.yaml#/UserNotAuthorized'
+    default:
+      $ref: '../../components/responses.yaml#/APIErrorResponse'
+  security:
+  - AuthToken: []

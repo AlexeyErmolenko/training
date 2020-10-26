@@ -1,0 +1,66 @@
+description: Pagination info for paginated lists of records
+type: object
+properties:
+
+  total:
+    description: Total number of records in data set
+    type: integer
+    minimum: 0
+    example: 1
+    x-type-options:
+      min: 1
+      max: 1000
+
+  count:
+    description: Number of records in currently returned list
+    type: integer
+    minimum: 0
+    example: 1
+    x-type-options:
+      min: 1
+      max: 50
+
+  per_page:
+    description: Number of records per page
+    type: integer
+    minimum: 0
+    example: 15
+    x-chance-type: pick
+    x-type-options: [10, 15, 20, 30, 50]
+
+  current_page:
+    description: Current page number, 1-based
+    type: integer
+    minimum: 1
+    example: 1
+    x-type-options:
+      min: 1
+      max: 50
+
+  total_pages:
+    description: Total number of pages available
+    type: integer
+    minimum: 0
+    example: 1
+    x-type-options:
+      min: 1
+      max: 50
+#
+#  links:
+#    description: Pagination links
+#    type: object
+#    properties:
+#      previous:
+#        description: URL of previous page
+#        type: string
+#        example: http://boxxle.saritasa-hosting.com/api/looks?per_page=2&page=1
+#        x-chance-type: url
+#        x-type-options:
+#          domain: boxxle.saritasa-hosting.com
+#      next:
+#        description: URL of next page
+#        type: string
+#        example: http://boxxle.saritasa-hosting.com/api/looks?per_page=2&page=3
+#        x-chance-type: url
+#        x-type-options:
+#          domain: boxxle.saritasa-hosting.com

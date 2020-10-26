@@ -1,0 +1,29 @@
+# Tools Specific files
+.idea/
+.phpstorm.meta.php
+_ide_helper.php
+.vscode/
+.project
+/nbproject/
+.install
+/.data
+*.orig
+.grunt
+.sass-cache
+.vagrant/
+*.log
+
+# Packaged Dependencies
+/node_modules/
+/vendor/
+
+# Laravel files
+.env
+/public/assets/
+/public/images/
+/public/storage/
+/public/vendor/
+/public/swagger-ui/
+/public/robots.txt
+/public/mix-manifest.json
+/resources/assets/html/

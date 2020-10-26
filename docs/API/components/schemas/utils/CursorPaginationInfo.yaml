@@ -1,0 +1,35 @@
+description: Pagination info for lists of records with cursor-based pagination
+type: object
+properties:
+
+  count:
+    description: Number of records in currently returned list
+    type: integer
+    minimum: 0
+    x-type-options:
+      min: 1
+      max: 50
+
+  current:
+    description: Current cursor value
+    type: integer
+    example: 0
+    x-type-options:
+      min: 0
+      max: 300
+
+  prev:
+    description: Cursor value for previous page (not currently supported)
+    type: integer
+    example: 100
+    x-type-options:
+      min: 1
+      max: 100
+
+  next:
+    description: Cursor value for the next page
+    type: integer
+    example: 149
+    x-type-options:
+      min: 100
+      max: 300

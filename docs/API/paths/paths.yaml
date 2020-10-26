@@ -1,0 +1,31 @@
+/auth:
+  $ref: 'auth/auth.yaml'
+/auth/instagram:
+  $ref: 'auth/instagram.yaml'
+/auth/facebook:
+  $ref: 'auth/facebook.yaml'
+/auth/password:
+  $ref: 'auth/password.yaml'
+/auth/password/reset:
+  $ref: 'auth/password_reset.yaml'
+
+/users:
+  $ref: 'users/users.yaml'
+/users/me:
+  $ref: 'users/me.yaml'
+/users/me/facebook:
+  $ref: 'users/me_facebook.yaml'
+/users/me/instagram:
+  $ref: 'users/me_instagram.yaml'
+
+/notifications:
+  $ref: 'notifications/notifications.yaml'
+/notifications/read:
+  $ref: 'notifications/read.yaml'
+
+/settings/notifications:
+  $ref: 'settings/notifications.yaml'
+/settings/payments:
+  $ref: 'settings/payments.yaml'
+/settings/device:
+  $ref: 'settings/device.yaml'

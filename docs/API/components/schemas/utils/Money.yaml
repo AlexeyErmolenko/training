@@ -1,0 +1,8 @@
+type: number
+format: float
+example: 200.00
+x-chance-type: floating
+x-type-options:
+  min: 20
+  max: 3000
+  fixed: 2

@@ -1,0 +1,43 @@
+FROM alpine:3.11
+LABEL Vendor="Saritasa"
+
+EXPOSE 80
+ENTRYPOINT ["/init"]
+WORKDIR /app
+ENV COMPOSER_HOME=/root/.composer \
+    COMPOSER_ALLOW_SUPERUSER=1
+
+# 1. Install PHP and related packages
+# 2. Remove development packages, required for PECL installation
+# 3. Finalize container
+RUN cat /etc/apk/repositories; \
+    apk --update upgrade; \
+    cat /etc/apk/repositories; \
+    apk add curl php7 php7-bcmath php7-bz2 php7-calendar php7-ctype php7-curl php7-intl php7-tokenizer php7-xmlwriter php7-fileinfo \
+    php7-json php7-ldap php7-mbstring php7-mcrypt php7-mysqli php7-dom php7-fileinfo \
+    php7-odbc php7-openssl php7-pcntl php7-pdo php7-pdo_dblib php7-pdo_mysql php7-mysqlnd \
+    php7-pdo_odbc php7-pdo_pgsql php7-pgsql php7-phar php7-posix \
+    php7-pspell php7-session php7-shmop php7-soap php7-sockets php7-gd \
+    php7-sqlite3 php7-sysvmsg php7-sysvsem php7-sysvshm php7-tidy php7-wddx php7-xml \
+    php7-xmlreader php7-xmlrpc php7-xsl php7-zip php7-zlib php7-exif php7-fpm php7-xmlwriter php7-simplexml php7-tokenizer \
+    php7-redis php7-imagick php7-opcache php7-gmp \
+    # Install additional tools
+    bash curl tar nginx \
+    ### install s6
+    && curl -LSs -o /tmp/s6-overlay-amd64.tar.gz \
+    https://github.com/just-containers/s6-overlay/releases/download/v1.22.1.0/s6-overlay-amd64.tar.gz && \
+    tar xzf /tmp/s6-overlay-amd64.tar.gz -C / &&\
+    ### install rattus
+    curl -LSs -o /usr/bin/rattus \
+    https://github.com/Saritasa/rattus/releases/download/0.1/rattus-linux-amd64 &&\
+    chmod +x /usr/bin/rattus &&\
+    ### clean
+    rm -rf /var/cache/apk/* && rm -rf /tmp/* &&\
+    rm -f /etc/php7/php-fpm.d/www.conf &&\
+    rm -f /etc/php7/conf.d/00_zlib.ini &&\
+    rm -f /etc/nginx/conf.d/default.conf &&\
+    ### Let application write in /tmp
+    chown root:nginx /tmp
+
+### Copy configuration files
+COPY ci/docker/rootfs /

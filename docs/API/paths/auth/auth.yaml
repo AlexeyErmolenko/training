@@ -1,0 +1,94 @@
+post:
+  tags: ['Authentication']
+  summary: Login existing user, returns access token
+  operationId: Login
+  requestBody:
+    description: Authentication Data
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - email
+            - password
+          properties:
+            email:
+              type: string
+              description: Registered user email
+              example: user@mail.com
+            password:
+              type: string
+              description: User password
+              format: password
+              example: '123456'
+  responses:
+    200:
+      description: Successful login
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yaml#/AuthToken'
+    400:
+      $ref: '../../components/responses.yaml#/InputValidationError'
+    404:
+      description: User with these login and password was not found
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yaml#/ErrorMessage'
+          example:
+            message: 'Wrong login or password'
+    default:
+      $ref: '../../components/responses.yaml#/APIErrorResponse'
+  security: []
+
+put:
+  tags: ['Authentication']
+  summary: Refresh the token and and return new authentication token
+  operationId: RefreshToken
+  requestBody:
+    description: Last authentication token
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - token
+          properties:
+            token:
+              type: string
+              description: Authentication token
+  responses:
+    200:
+      description: Successful refresh
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yaml#/AuthToken'
+    401:
+      description: Error regenerating token
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yaml#/ErrorMessage'
+          example:
+            message: "You must provide authentication token, that expired recently"
+    default:
+      $ref: '../../components/responses.yaml#/APIErrorResponse'
+  security: []
+
+delete:
+  tags: ['Authentication']
+  summary: Logout, makes authentication token invalid
+  operationId: Logout
+  responses:
+    204:
+      description: Successful logout. No response content.
+    401:
+      $ref: '../../components/responses.yaml#/UserNotAuthorized'
+    default:
+      $ref: '../../components/responses.yaml#/APIErrorResponse'
+  security:
+  - AuthToken: []

@@ -1,0 +1,34 @@
+put:
+  tags: ['Settings']
+  summary: Set user's device ID for push notifications
+  operationId: SetDeviceID
+  requestBody:
+    description: Device type and identifier
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            device_id:
+              type: string
+              description: ID of this device in Apple Push Notifications service or Google Cloud meddaging
+              readOnly: true
+            device_type:
+              type: string
+              description: Type of device - Android or iOS
+              enum:
+              - Android
+              - iOS
+  responses:
+    201:
+      description: Device with this ID was added
+    204:
+      description: Device with this ID is already known to belong to this user
+    400:
+      $ref: '../../components/responses.yaml#/InputValidationError'
+    401:
+      $ref: '../../components/responses.yaml#/UserNotAuthorized'
+    default:
+      $ref: '../../components/responses.yaml#/APIErrorResponse'
+  security:
+  - AuthToken: []

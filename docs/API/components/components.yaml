@@ -1,0 +1,18 @@
+schemas:
+  $ref: ./schemas.yaml
+
+parameters:
+  $ref: ./parameters.yaml
+
+responses:
+  $ref: ./responses.yaml
+
+securitySchemes:
+  AuthToken:
+    type: http
+    scheme: bearer
+    bearerFormat: JWT
+  PasswordResetToken:
+    type: apiKey
+    in: query
+    name: token

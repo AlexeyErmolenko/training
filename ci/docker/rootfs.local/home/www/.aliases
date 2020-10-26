@@ -1,0 +1,3 @@
+source /root/.aliases
+
+alias rmhot='rm public/*hot*'

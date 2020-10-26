@@ -1,0 +1,41 @@
+PageSize:
+  description: Page size for paginated data
+  name: per_page
+  in: query
+  allowEmptyValue: true
+  schema:
+    type: integer
+    default: 30
+
+Page:
+  description: Page number for paginated data, 1-based
+  name: page
+  in: query
+  allowEmptyValue: true
+  schema:
+    type: integer
+    default: 1
+
+Cursor:
+  description: Pointer for cursor pagination
+  name: current
+  in: query
+  allowEmptyValue: true
+  schema:
+    type: integer
+    default: 0
+
+Include:
+  description: 'Comma-separated list of relations to include. For example: creator,references,items'
+  name: include
+  in: query
+  schema:
+    type: string
+
+Search:
+  description: Search query
+  name: q
+  in: query
+  allowEmptyValue: true
+  schema:
+    type: string

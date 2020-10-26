@@ -1,0 +1,41 @@
+get:
+  tags: ['User']
+  summary: Get or search paginated list of users (Admin)
+  operationId: GetUsersList
+  parameters:
+    - $ref: '../../components/parameters.yaml#/Search'
+    - $ref: '../../components/parameters.yaml#/PageSize'
+    - $ref: '../../components/parameters.yaml#/Page'
+  responses:
+    200:
+      description: Return list of users successfully
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yaml#/UsersList'
+    default:
+      $ref: '../../components/responses.yaml#/APIErrorResponse'
+  security:
+    - AuthToken: []
+
+
+post:
+  tags: ['User']
+  summary: Create new user (Registration)
+  operationId: CreateUser
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: '../../components/schemas.yaml#/UserRegistration'
+  responses:
+    201:
+      description: 'User successfully created'
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yaml#/User'
+    400:
+      $ref: '../../components/responses.yaml#/InputValidationError'
+  security: []

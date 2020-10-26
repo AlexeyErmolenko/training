@@ -1,0 +1,10 @@
+type: object
+required:
+- token
+properties:
+
+  token:
+    type: string
+    example: "sWwcCYh53pZ9MAB...URvEzLsVP5rpsds"
+    x-type-options:
+      length: 300

@@ -1,0 +1,37 @@
+type: object
+description: Model for user registration
+required:
+- first_name
+- last_name
+- email
+- gender
+properties:
+
+  id:
+    $ref: 'utils/Identifier.yaml'
+
+  first_name:
+    type: string
+    description: User first name, visible to other users
+    maxLength: 100
+    x-chance-type: first
+    example: Vader
+
+  last_name:
+    type: string
+    description: User last name, visible to other users
+    maxLength: 100
+    x-chance-type: last
+    example: Darth
+
+  email:
+    type: string
+    description: Registered user email
+    format: email
+    example: darth.vader@galaxy-imperia.gov
+    x-chance-type: email
+
+  gender:
+    type: string
+    description: Male or Female
+    enum: ['Male', 'Female']

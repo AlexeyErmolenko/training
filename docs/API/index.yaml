@@ -1,0 +1,26 @@
+openapi: 3.0.0
+info:
+  title: training_start
+  description: >
+    API documentation for training_start - description must be here
+
+    * Development: [https://training_start-api.saritasa-hosting.com](https://training_start-api.saritasa-hosting.com)
+  contact:
+    name: Sergey Populov
+    email: sergey@saritasa.com
+  version:
+    $ref: ./version.yaml
+
+components:
+  $ref: ./components/components.yaml
+
+paths:
+  $ref: ./paths/paths.yaml
+
+servers:
+  - description: Development
+    url: https://training_start-api.saritasa-hosting.com/api
+  - description: Local
+    url: https://training_start-web.service.docker/api
+  - description: Production
+    url: https://api.training_start.com/api

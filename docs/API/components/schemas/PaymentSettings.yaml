@@ -1,0 +1,16 @@
+type: object
+description: Payment settings
+properties:
+
+  token:
+    type: string
+    description: Stripe open token, which user can use to create his account and manage payments methods. READONLY.
+    example: pub_lkj4l5kj235lk234543
+    readOnly: true
+    x-chance-type: hash
+
+  user_id:
+    type: string
+    description: Stripe user ID
+    example: usr_9849h5rjki34hnjk523n4
+    x-chance-type: hash

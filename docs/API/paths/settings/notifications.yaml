@@ -1,0 +1,56 @@
+get:
+  tags: ['Settings']
+  summary: Get list of effective notifications settings. No paging provided for this list.
+  operationId: GetNotificationSettings
+  responses:
+    200:
+      description: Return list of notifications settings successfully
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yaml#/NotificationSettingsList'
+    401:
+      $ref: '../../components/responses.yaml#/UserNotAuthorized'
+    default:
+      $ref: '../../components/responses.yaml#/APIErrorResponse'
+  security:
+  - AuthToken: []
+
+put:
+  tags: ['Settings']
+  summary: Update user's notifications settings
+  operationId: UpdateNotificationSettings
+  requestBody:
+    description: List of notifications settings
+    required: true
+    content:
+      application/json:
+        schema:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+                description: Unique internal identifier
+                minimum: 1
+                example: 5
+              is_on:
+                type: boolean
+                description: If setting is on or off
+                example: true
+  responses:
+    200:
+      description: Return list of notifications settings successfully
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yaml#/NotificationSettingsList'
+    400:
+      $ref: '../../components/responses.yaml#/InputValidationError'
+    401:
+      $ref: '../../components/responses.yaml#/UserNotAuthorized'
+    default:
+      $ref: '../../components/responses.yaml#/APIErrorResponse'
+  security:
+  - AuthToken: []

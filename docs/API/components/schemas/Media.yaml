@@ -1,0 +1,16 @@
+type: object
+description: Image or video, visually representing product or look
+required:
+- thumbnail
+- full
+properties:
+
+  thumbnail:
+    description: URL of miniature image, displayed in list
+    example: https://training_start-images.s3-aws-region.amazonaws.com/media/3345433834_small.jpg
+    $ref: 'utils/ImageURL.yaml'
+
+  full:
+    description: URL of full-size image or video
+    example: https://training_start-images.s3-aws-region.amazonaws.com/media/3345433834.jpg
+    $ref: 'utils/ImageURL.yaml'

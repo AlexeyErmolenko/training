@@ -1,0 +1,9 @@
+description: Login or Register user with social account
+type: object
+required:
+  - access_token
+properties:
+  access_token:
+    type: string
+    description: Access token, issued by social network
+    example: lkjdf3ijlkfwuj908123u498r7y38kjsdfhaiurh43

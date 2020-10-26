@@ -1,0 +1,28 @@
+version: '2.1'
+
+services:
+
+  tests:
+    image: registry.saritasa.com/training_start/backend:develop
+    hostname: training_start-backend
+    container_name: training_start-backend-tests
+    entrypoint: tools/autotest.sh
+    depends_on:
+      - db
+    environment:
+      APP_ENV: testing
+
+  db:
+    image: postgres:12-alpine
+    hostname: training_start-testdb
+    container_name: training_start-testdb
+    ports: [5432]
+    environment:
+      POSTGRES_DB: training_start-test
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: secret
+      PGDATA: /var/lib/postgresql/data/pgdata
+
+networks:
+  default:
+    name:  training_start_tests

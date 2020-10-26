@@ -1,0 +1,18 @@
+APIErrorResponse:
+  description: Unexpected API error. Probably, 500
+  content:
+    application/json:
+      schema:
+        $ref: 'schemas.yaml#/ErrorMessage'
+
+UserNotAuthorized:
+  $ref: 'responses/UserNotAuthorized.yaml'
+
+AccessDenied:
+  $ref: 'responses/AccessDenied.yaml'
+
+NotFound:
+  $ref: 'responses/NotFound.yaml'
+
+InputValidationError:
+  $ref: 'responses/InputValidationError.yaml'

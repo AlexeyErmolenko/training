@@ -1,0 +1,22 @@
+type: object
+allOf:
+- $ref: 'ErrorMessage.yaml'
+- type: object
+  properties:
+
+    errors:
+      type: array
+      description: List of validation errors
+      items:
+        type: object
+        properties:
+          field:
+            type: string
+            description: Request field name, containing erroneous data
+            x-chance-type: word
+          messages:
+            type: array
+            items:
+              type: string
+              description: Message text, explaining problem. Should be shown to user.
+              x-chance-type: sentence

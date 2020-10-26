@@ -1,0 +1,5 @@
+type: string
+format: date-time
+example: 2017-04-12T23:20:50.52Z
+x-chance-type: fixed
+x-type-value: 2017-04-12T23:20:50.52Z

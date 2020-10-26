@@ -1,0 +1,5 @@
+type: string
+x-chance-type: url
+x-type-options:
+  domain: training_start-images.s3-us-west.amazonaws.com
+  extensions: ['gif', 'jpg', 'png']

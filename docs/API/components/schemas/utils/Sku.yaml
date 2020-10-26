@@ -1,0 +1,7 @@
+type: string
+description: Stock Keeping Unit - product identification code for a store or product, helps track the item for inventory
+maxLength: 10
+example: 2K4B42
+x-type-options:
+  length: 7
+  pool: 1234567890ABCDEFGHIG

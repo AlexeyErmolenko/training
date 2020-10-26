@@ -1,0 +1,10 @@
+type: object
+properties:
+
+  userId:
+    type: integer
+    description: User id, who just logged out
+    example: 5
+    x-type-options:
+      min: 1
+      max: 1000

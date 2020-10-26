@@ -1,0 +1,34 @@
+{
+  "id": "9d16686f-5eb7-a42f-c912-b9e79d7fcb67",
+  "name": "training_start Docker",
+  "values": [
+    {
+      "key": "host",
+      "value": "http://training_start-web.service.docker",
+      "type": "text",
+      "enabled": true
+    },
+    {
+      "key": "admin_email",
+      "value": "admin@mail.com",
+      "type": "text",
+      "enabled": true
+    },
+    {
+      "key": "admin_password",
+      "value": "123456",
+      "type": "text",
+      "enabled": true
+    },
+    {
+      "key": "token",
+      "type": "text",
+      "value": "",
+      "enabled": true
+    }
+  ],
+  "timestamp": 1486121981402,
+  "_postman_variable_scope": "environment",
+  "_postman_exported_at": "2017-02-03T13:21:44.450Z",
+  "_postman_exported_using": "Postman/4.9.2"
+}

@@ -1,0 +1,7 @@
+description: User has no permissions to requested item or operation
+content:
+  application/json:
+    schema:
+      $ref: '../schemas.yaml#/ErrorMessage'
+    example:
+      message: 'You cannot access this item'

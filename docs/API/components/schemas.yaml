@@ -1,0 +1,56 @@
+AuthToken:
+  $ref: ./schemas/AuthToken.yaml
+
+ErrorMessage:
+  $ref: ./schemas/ErrorMessage.yaml
+
+ErrorDetails:
+  $ref: ./schemas/ErrorDetails.yaml
+
+Identifier:
+  $ref: ./schemas/utils/Identifier.yaml
+
+PaginationInfo:
+  $ref: ./schemas/utils/PaginationInfo.yaml
+
+CursorPaginationInfo:
+  $ref: ./schemas/utils/CursorPaginationInfo.yaml
+
+SuccessConfirmation:
+  $ref: ./schemas/SuccessConfirmation.yaml
+
+SocialLogin:
+  $ref: ./schemas/SocialLogin.yaml
+
+User:
+  $ref: ./schemas/User.yaml
+
+UserProfile:
+  $ref: ./schemas/UserProfile.yaml
+
+UserRegistration:
+  $ref: ./schemas/UserRegistration.yaml
+
+UsersList:
+  $ref: ./schemas/lists/UsersList.yaml
+
+Notification:
+  $ref: ./schemas/Notification.yaml
+
+NotificationsList:
+  $ref: ./schemas/lists/NotificationsList.yaml
+
+NotificationSetting:
+  $ref: ./schemas/NotificationSetting.yaml
+
+NotificationSettingsList:
+  $ref: ./schemas/lists/NotificationSettingsList.yaml
+
+PaymentSettings:
+  $ref: ./schemas/PaymentSettings.yaml
+
+Contact:
+  $ref: ./schemas/Contact.yaml
+
+ContactsList:
+  $ref: ./schemas/lists/ContactsList.yaml

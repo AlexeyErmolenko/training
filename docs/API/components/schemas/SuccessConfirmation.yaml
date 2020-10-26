@@ -1,0 +1,8 @@
+type: object
+description: Response model returned, when request processed successfully
+properties:
+
+  message:
+    type: string
+    description: 'Confirmation message text'
+    x-chance-type: sentence
