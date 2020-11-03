@@ -22,7 +22,7 @@ class Comment extends Model
 {
     use CamelCaseForeignKeys;
     use SoftDeletes;
-    
+
     public const ID = 'id';
     public const LISTING_ID = 'listingId';
     public const CREATED_BY = 'createdBy';

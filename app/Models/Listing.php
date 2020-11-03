@@ -24,7 +24,7 @@ class Listing extends Model
 {
     use CamelCaseForeignKeys;
     use SoftDeletes;
-    
+
     public const ID = 'id';
     public const CAR_MODEL_ID = 'carModelId';
     public const CAR_TRIM_ID = 'carTrimId';

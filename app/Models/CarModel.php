@@ -23,7 +23,7 @@ class CarModel extends Model
 {
     use CamelCaseForeignKeys;
     use SoftDeletes;
-    
+
     public const ID = 'id';
     public const MAKE_ID = 'makeId';
     public const NAME = 'name';

@@ -23,7 +23,7 @@ class Image extends Model
 {
     use CamelCaseForeignKeys;
     use SoftDeletes;
-    
+
     public const ID = 'id';
     public const LISTING_ID = 'listingId';
     public const PATH = 'path';

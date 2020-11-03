@@ -21,7 +21,7 @@ class CarTrim extends Model
 {
     use CamelCaseForeignKeys;
     use SoftDeletes;
-    
+
     public const ID = 'id';
     public const NAME = 'name';
     public const MODEL_ID = 'modelId';
