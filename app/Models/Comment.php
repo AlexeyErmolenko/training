@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Helpers\CamelCaseForeignKeys;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
@@ -17,6 +18,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property Carbon $createdAt Date of creating the entity
  * @property Carbon $updatedAt Date of updating the entity
  * @property Carbon $deletedAt Date of deleting the entity
+ *
+ * @property-read Listing $listing Listing for comment
+ * @property-read User $createdByUser Creator of the comment
  */
 class Comment extends Model
 {
@@ -86,4 +90,24 @@ class Comment extends Model
         self::UPDATED_AT,
         self::DELETED_AT,
     ];
+    
+    /**
+     * Return listing for comment.
+     *
+     * @return BelongsTo
+     */
+    public function listing(): BelongsTo
+    {
+        return $this->belongsTo(Listing::class, self::LISTING_ID);
+    }
+    
+    /**
+     * Return the creator of the comment.
+     *
+     * @return BelongsTo
+     */
+    public function createdByUser(): BelongsTo
+    {
+        return $this->belongsTo(User::class, self::CREATED_BY);
+    }
 }

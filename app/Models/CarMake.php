@@ -5,7 +5,9 @@ namespace App\Models;
 use App\Models\Helpers\CamelCaseForeignKeys;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Collection;
 
 /**
  * Model for entity car makes.
@@ -15,6 +17,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property Carbon $createdAt Date of creating the entity
  * @property Carbon $updatedAt Date of updating the entity
  * @property Carbon $deletedAt Date of deleting the entity
+ *
+ * @property-read Collection|CarModel[] $carModels Car models of the maker
  */
 class CarMake extends Model
 {
@@ -78,4 +82,14 @@ class CarMake extends Model
         self::UPDATED_AT,
         self::DELETED_AT,
     ];
+    
+    /**
+     * Returns car models relation where this maker as the car model maker.
+     *
+     * @return HasMany
+     */
+    public function carModels(): HasMany
+    {
+        return $this->hasMany(CarModel::class, CarModel::MAKE_ID);
+    }
 }

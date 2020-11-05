@@ -43,7 +43,7 @@ CREATE TABLE "CarTrims" (
 CREATE TABLE "Listings" (
     "id" BIGSERIAL NOT NULL,
     "carModelId" BIGINT NOT NULL,
-    "carTrimId" BIGINT NOT NULL,
+    "carTrimId" BIGINT,
     "createdBy" BIGINT NOT NULL,
     "year" SMALLINT,
     "price" NUMERIC DEFAULT 0 NOT NULL,
@@ -78,7 +78,7 @@ ALTER TABLE "CarTrims" ADD CONSTRAINT  FK_carTrims_carModels FOREIGN KEY ("model
 ALTER TABLE "Listings" ADD CONSTRAINT  FK_listings_carModels FOREIGN KEY ("carModelId") REFERENCES "CarModels" ("id")
     ON UPDATE CASCADE ON DELETE CASCADE;
 ALTER TABLE "Listings" ADD CONSTRAINT  FK_listings_carTrims FOREIGN KEY ("carTrimId") REFERENCES "CarTrims" ("id")
-    ON UPDATE CASCADE ON DELETE CASCADE;
+    ON UPDATE CASCADE ON DELETE SET NULL;
 ALTER TABLE "Listings" ADD CONSTRAINT  FK_listings_users FOREIGN KEY ("createdBy") REFERENCES "Users" ("id")
     ON UPDATE CASCADE ON DELETE CASCADE;
 ALTER TABLE "Comments" ADD CONSTRAINT  FK_comments_users FOREIGN KEY ("createdBy") REFERENCES "Users" ("id")

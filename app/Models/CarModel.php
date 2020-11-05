@@ -5,7 +5,10 @@ namespace App\Models;
 use App\Models\Helpers\CamelCaseForeignKeys;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Collection;
 
 /**
  * Model for entity car models.
@@ -18,6 +21,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property Carbon $createdAt Date of creating the entity
  * @property Carbon $updatedAt Date of updating the entity
  * @property Carbon $deletedAt Date of deleting the entity
+ *
+ * @property-read CarMake $carMake Car maker of the car model
+ * @property-read Collection|CarTrim[] $carTrims Car trims of the car model
+ * @property-read Collection|Listing[] $listings Listings fot the car model
  */
 class CarModel extends Model
 {
@@ -90,4 +97,34 @@ class CarModel extends Model
         self::UPDATED_AT,
         self::DELETED_AT,
     ];
+    
+    /**
+     * Return car maker for the car model.
+     *
+     * @return BelongsTo
+     */
+    public function carMake(): BelongsTo
+    {
+        return $this->belongsTo(CarMake::class, self::MAKE_ID);
+    }
+    
+    /**
+     * Return car trims for the car model.
+     *
+     * @return HasMany
+     */
+    public function carTrims(): HasMany
+    {
+        return $this->hasMany(CarTrim::class, CarTrim::MODEL_ID);
+    }
+    
+    /**
+     * Return listings for this car model.
+     *
+     * @return HasMany
+     */
+    public function listings(): HasMany
+    {
+        return $this->hasMany(Listing::class, Listing::CAR_MODEL_ID);
+    }
 }

@@ -5,17 +5,23 @@ namespace App\Models;
 use App\Models\Helpers\CamelCaseForeignKeys;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Collection;
 
 /**
-  * Model for entity car trims.
-  *
-  * @property int $id Car trim identifier
-  * @property int $modelId Car model identifier
-  * @property string $name  Name of the car trim
-  * @property Carbon $createdAt Date of creating the entity
-  * @property Carbon $updatedAt Date of updating the entity
-  * @property Carbon $deletedAt Date of deleting the entity
+ * Model for entity car trims.
+ *
+ * @property int $id Car trim identifier
+ * @property int $modelId Car model identifier
+ * @property string $name  Name of the car trim
+ * @property Carbon $createdAt Date of creating the entity
+ * @property Carbon $updatedAt Date of updating the entity
+ * @property Carbon $deletedAt Date of deleting the entity
+ *
+ * @property-read CarModel $carModel Car model for the car trim
+ * @property-read Collection|Listing[] $listings Listings for the car trim
  */
 class CarTrim extends Model
 {
@@ -82,4 +88,24 @@ class CarTrim extends Model
         self::UPDATED_AT,
         self::DELETED_AT,
     ];
+    
+    /**
+     * Return car model for the car trim.
+     *
+     * @return BelongsTo
+     */
+    public function carModel(): BelongsTo
+    {
+        return $this->belongsTo(CarModel::class, self::MODEL_ID);
+    }
+    
+    /**
+     * Return listings for the car trim.
+     *
+     * @return HasMany
+     */
+    public function listings(): HasMany
+    {
+        return $this->hasMany(Listing::class, Listing::CAR_TRIM_ID);
+    }
 }

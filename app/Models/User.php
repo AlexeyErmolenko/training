@@ -4,7 +4,9 @@ namespace App\Models;
 
 use App\Models\Helpers\CamelCaseForeignKeys;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Collection;
 use Saritasa\Database\Eloquent\Models\User as BaseUserModel;
 use Saritasa\Enums\Gender;
 use Saritasa\Roles\HasRole;
@@ -24,6 +26,9 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
  * @property Carbon $createdAt Date when user was created
  * @property Carbon $updatedAt Date when user was last time updated
  * @property Carbon|null $deletedAt Date when user was deleted
+ *
+ * @property-read Collection|Listing[] $listings Listings of the user
+ * @property-read Collection|Comment[] $comments Comments of the user
  */
 class User extends BaseUserModel implements JWTSubject
 {
@@ -81,5 +86,25 @@ class User extends BaseUserModel implements JWTSubject
     public function getJWTCustomClaims(): array
     {
         return [];
+    }
+    
+    /**
+     * Return listings of the user.
+     *
+     * @return HasMany
+     */
+    public function listings(): HasMany
+    {
+        return $this->hasMany(Listing::class, Listing::CREATED_BY);
+    }
+    
+    /**
+     * Return comments for the user.
+     *
+     * @return HasMany
+     */
+    public function comments(): HasMany
+    {
+        return $this->hasMany(Comment::class, Comment::CREATED_BY);
     }
 }

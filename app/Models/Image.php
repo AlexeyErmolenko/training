@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Helpers\CamelCaseForeignKeys;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
@@ -18,6 +19,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property Carbon $createdAt Date of creating the entity
  * @property Carbon $updatedAt Date of updating the entity
  * @property Carbon $deletedAt Date of deleting the entity
+ *
+ * @property-read Listing $listing Listing for image
  */
 class Image extends Model
 {
@@ -90,4 +93,14 @@ class Image extends Model
         self::UPDATED_AT,
         self::DELETED_AT,
     ];
+    
+    /**
+     * Return listing for image.
+     *
+     * @return BelongsTo
+     */
+    public function listing(): BelongsTo
+    {
+        return $this->belongsTo(Listing::class, self::LISTING_ID);
+    }
 }

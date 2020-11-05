@@ -5,7 +5,10 @@ namespace App\Models;
 use App\Models\Helpers\CamelCaseForeignKeys;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Collection;
 
 /**
  * Model for entity listing.
@@ -19,6 +22,12 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property Carbon $createdAt Date of creating the entity
  * @property Carbon $updatedAt Date of updating the entity
  * @property Carbon $deletedAt Date of deleting the entity
+ *
+ * @property-read User $createdByUser User who created the listing
+ * @property-read CarModel $carModel Car model for the listing
+ * @property-read CarTrim $carTrim Car trim for the listing
+ * @property-read Collection|Image[] $images Images for the listing
+ * @property-read Collection|Comment[] $comments Comments for the listing
  */
 class Listing extends Model
 {
@@ -94,4 +103,54 @@ class Listing extends Model
         self::UPDATED_AT,
         self::DELETED_AT,
     ];
+    
+    /**
+     * Return user for the listing.
+     *
+     * @return BelongsTo
+     */
+    public function createdByUser(): BelongsTo
+    {
+        return $this->belongsTo(User::class, self::CREATED_BY);
+    }
+    
+    /**
+     * Return car model for the listing.
+     *
+     * @return BelongsTo
+     */
+    public function carModel(): BelongsTo
+    {
+        return $this->belongsTo(CarModel::class, self::CAR_MODEL_ID);
+    }
+    
+    /**
+     * Return car trim for the listing.
+     *
+     * @return BelongsTo
+     */
+    public function carTrim(): BelongsTo
+    {
+        return $this->belongsTo(CarTrim::class, self::CAR_TRIM_ID);
+    }
+    
+    /**
+     * Return images for the listing.
+     *
+     * @return HasMany
+     */
+    public function images(): HasMany
+    {
+        return $this->hasMany(Image::class, Image::LISTING_ID);
+    }
+    
+    /**
+     * Return comments for the listing.
+     *
+     * @return HasMany
+     */
+    public function comments(): HasMany
+    {
+        return $this->hasMany(Comment::class, Comment::LISTING_ID);
+    }
 }
