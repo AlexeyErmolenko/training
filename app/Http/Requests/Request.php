@@ -18,4 +18,14 @@ abstract class Request extends FormRequest
     {
         return true;
     }
+    
+    /**
+     * Returns validation rules.
+     *
+     * @return mixed[]
+     */
+    public function rules(): array
+    {
+        return [];
+    }
 }

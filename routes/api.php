@@ -16,6 +16,7 @@ use Saritasa\LaravelControllers\Api\JWTAuthApiController;
 use Saritasa\LaravelControllers\Api\ForgotPasswordApiController;
 use Saritasa\LaravelControllers\Api\ResetPasswordApiController;
 use Saritasa\LaravelUploads\Http\Controllers\UploadsApiController;
+use App\Http\Controllers\Api\v1\RegisterApiController;
 
 /**
  * Api router instance.
@@ -26,6 +27,8 @@ $api = app(Router::class);
 $api->version(config('api.version'), ['middleware' => 'bindings'], function (Router $api) {
     $api->post('auth', JWTAuthApiController::class.'@login');
     $api->put('auth', JWTAuthApiController::class.'@refreshToken');
+    
+    $api->post('users', RegisterApiController::class . '@register');
 
     $api->post('auth/password/reset', ForgotPasswordApiController::class.'@sendResetLinkEmail');
     $api->put('auth/password/reset', ResetPasswordApiController::class.'@reset');

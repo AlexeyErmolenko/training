@@ -15,6 +15,7 @@
     "saritasa/eloquent-custom": "^1.1",
     "saritasa/laravel-controllers": "^3.3",
     "saritasa/laravel-middleware": "^2.1",
+    "saritasa/laravel-s3-uploads": "^1.1",
     "saritasa/roles-simple": "^1.0",
     "tymon/jwt-auth": "1.0.0-rc.5"
   },

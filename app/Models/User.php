@@ -44,6 +44,7 @@ class User extends BaseUserModel implements JWTSubject
     public const CREATED_AT = 'createdAt';
     public const UPDATED_AT = 'updatedAt';
     public const DELETED_AT = 'deletedAt';
+    public const ROLE_ID = 'role_id';
 
     public const DEFAULT_AVATAR = 'images/avatar/default.png';
     
@@ -53,6 +54,56 @@ class User extends BaseUserModel implements JWTSubject
      * @var string
      */
     protected $table = 'Users';
+    
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var string[]
+     */
+    protected $fillable = [
+        self::EMAIL,
+        self::FIRST_NAME,
+        self::LAST_NAME,
+        self::AVATAR,
+        self::ROLE_ID,
+    ];
+    /**
+     * The attributes that should be visible in arrays.
+     *
+     * @var string[]
+     */
+    protected $visible = [
+        self::ID,
+        self::EMAIL,
+        self::FIRST_NAME,
+        self::LAST_NAME,
+        self::CREATED_AT,
+    ];
+    
+    /**
+     * The attributes that are not mass assignable.
+     *
+     * @var string[]
+     */
+    protected $guarded = [
+        self::ID,
+        self::REMEMBER_TOKEN,
+        self::CREATED_AT,
+        self::UPDATED_AT,
+    ];
+    
+    /**
+     * The attributes that should not be visible in arrays.
+     *
+     * @var string[]
+     */
+    protected $hidden = [
+        self::PWD_FIELD,
+        self::REMEMBER_TOKEN,
+        self::UPDATED_AT,
+        self::DELETED_AT,
+        self::ROLE_ID,
+    ];
 
     /**
      * Mapping of enum fields.
@@ -69,7 +120,7 @@ class User extends BaseUserModel implements JWTSubject
      * @var mixed[]
      */
     protected $defaults = [
-        'avatar_url' => self::DEFAULT_AVATAR,
+        self::AVATAR => self::DEFAULT_AVATAR,
     ];
 
     /**
