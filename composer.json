@@ -10,6 +10,7 @@
     "dingo/api": "^2.4",
     "laravel/framework": "^6.0",
     "laravel/horizon": "^3.0",
+    "pragmarx/google2fa-laravel": "^1.4",
     "predis/predis": "^1.1",
     "saritasa/dingo-api-custom": "^2.2",
     "saritasa/eloquent-custom": "^1.1",

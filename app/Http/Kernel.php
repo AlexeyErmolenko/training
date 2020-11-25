@@ -19,6 +19,7 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Routing\Middleware\ThrottleRequests;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use App\Http\Middleware\Google2FA;
 use Saritasa\Middleware\ForceHttps;
 use Saritasa\Roles\Middleware\VerifyRole;
 
@@ -76,5 +77,6 @@ class Kernel extends HttpKernel
         'guest' => RedirectIfAuthenticated::class,
         'throttle' => ThrottleRequests::class,
         'role' => VerifyRole::class,
+        '2fa' => Google2FA::class
     ];
 }

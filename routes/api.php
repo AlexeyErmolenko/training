@@ -15,8 +15,9 @@ use Dingo\Api\Routing\Router;
 use Saritasa\LaravelControllers\Api\JWTAuthApiController;
 use Saritasa\LaravelControllers\Api\ForgotPasswordApiController;
 use Saritasa\LaravelControllers\Api\ResetPasswordApiController;
-use Saritasa\LaravelUploads\Http\Controllers\UploadsApiController;
 use App\Http\Controllers\Api\v1\RegisterApiController;
+use App\Http\Controllers\Api\v1\ProfileController;
+use App\Http\Controllers\Api\v1\Google2FAController;
 
 /**
  * Api router instance.
@@ -33,10 +34,15 @@ $api->version(config('api.version'), ['middleware' => 'bindings'], function (Rou
     $api->post('auth/password/reset', ForgotPasswordApiController::class.'@sendResetLinkEmail');
     $api->put('auth/password/reset', ResetPasswordApiController::class.'@reset');
 
-    $api->get('/testPdf', \App\Http\Controllers\PdfController::class.'@download');
-
     // Group of routes that require authentication
     $api->group(['middleware' => ['api.auth']], function (Router $api) {
-        $api->delete('auth', JWTAuthApiController::class.'@logout');
+        $api->post('auth/2fa', Google2FAController::class . '@verified');
+        
+        $api->delete('auth', JWTAuthApiController::class . '@logout');
+        
+        $api->group(['middleware' => ['2fa']], function (Router $api) {
+            $api->get('users/me', ProfileController::class . '@me');
+        });
+    
     });
 });
