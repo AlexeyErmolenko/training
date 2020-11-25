@@ -4,7 +4,7 @@
 namespace App\Http\Controllers\Api\v1;
 
 use App\Http\Requests\RegisterUserRequest;
-use App\Http\Transformers\UserTransformer;
+use App\Http\Transformers\RegisterUserTransformer;
 use App\Services\UserManagementService;
 use Dingo\Api\Http\Response;
 use Saritasa\LaravelControllers\Api\BaseApiController;
@@ -14,7 +14,7 @@ class RegisterApiController extends BaseApiController
     public function register(
         RegisterUserRequest $request,
         UserManagementService $service,
-        UserTransformer $transformer
+        RegisterUserTransformer $transformer
     ): Response {
         $user = $service->create($request->getUserData());
         

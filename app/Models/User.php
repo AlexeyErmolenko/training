@@ -23,6 +23,7 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
  * @property string|null $avatarUrl User avatar url
  * @property string|null $remember_token Remember token
  * @property int $role_id Role ID
+ * @property string $google2FASecret Google two factor auth secret
  * @property Carbon $createdAt Date when user was created
  * @property Carbon $updatedAt Date when user was last time updated
  * @property Carbon|null $deletedAt Date when user was deleted
@@ -35,7 +36,6 @@ class User extends BaseUserModel implements JWTSubject
     use Notifiable;
     use CamelCaseForeignKeys;
     use HasRole;
-
     
     public const FIRST_NAME = 'firstName';
     public const LAST_NAME = 'lastName';
@@ -45,8 +45,26 @@ class User extends BaseUserModel implements JWTSubject
     public const UPDATED_AT = 'updatedAt';
     public const DELETED_AT = 'deletedAt';
     public const ROLE_ID = 'role_id';
+    public const GOOGLE_TWO_FACTOR_AUTH_SECRET = 'google2FASecret';
 
     public const DEFAULT_AVATAR = 'images/avatar/default.png';
+    
+    public const IS_2_FA_PASSED = 'is2FAPassed';
+    public const AUTH_PASSED_TIME = 'authPassedTime';
+    
+    /**
+     * QR code image.
+     *
+     * @var string
+     */
+    protected $qrCodeImage;
+    
+    /**
+     * Two factor auth passed.
+     *
+     * @var bool
+     */
+    protected $is2FAPassed = false;
     
     /**
      * The table associated with the model.
@@ -90,6 +108,7 @@ class User extends BaseUserModel implements JWTSubject
         self::REMEMBER_TOKEN,
         self::CREATED_AT,
         self::UPDATED_AT,
+        self::GOOGLE_TWO_FACTOR_AUTH_SECRET,
     ];
     
     /**
@@ -103,6 +122,7 @@ class User extends BaseUserModel implements JWTSubject
         self::UPDATED_AT,
         self::DELETED_AT,
         self::ROLE_ID,
+        self::GOOGLE_TWO_FACTOR_AUTH_SECRET
     ];
 
     /**
@@ -136,7 +156,10 @@ class User extends BaseUserModel implements JWTSubject
      */
     public function getJWTCustomClaims(): array
     {
-        return [];
+        return [
+            self::IS_2_FA_PASSED => $this->is2FAPassed,
+            'authPassedTime' => $this->is2FAPassed ? Carbon::now()->toIso8601String() : '',
+        ];
     }
     
     /**
@@ -157,5 +180,40 @@ class User extends BaseUserModel implements JWTSubject
     public function comments(): HasMany
     {
         return $this->hasMany(Comment::class, Comment::CREATED_BY);
+    }
+    
+    /**
+     * Get QR code image for 2FA.
+     *
+     * @return string
+     */
+    public function getQrCodeImage(): string
+    {
+        if (empty($this->qrCodeImage)) {
+            return '';
+        }
+        return $this->qrCodeImage;
+    }
+    
+    /**
+     * Set QR code image for 2FA.
+     *
+     * @param string $image Image inline
+     */
+    public function setQrCodeImage(string $image): void
+    {
+        $this->qrCodeImage = $image;
+    }
+    
+    /**
+     * Set is 2FA passed.
+     *
+     * @param bool $isPassed
+     *
+     * @return void
+     */
+    public function setIs2FAPassed(bool $isPassed): void
+    {
+        $this->is2FAPassed = $isPassed;
     }
 }
